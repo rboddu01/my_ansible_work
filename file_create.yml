@@ -10,3 +10,4 @@
      copy:
       dest: /root/newtest.txt
       content: "{{ newtest }}"
+         
