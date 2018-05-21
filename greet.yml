@@ -2,7 +2,7 @@
  - hosts: host1 host2
    user: root
    vars:
-    motd_greet: 'WELCOME TO TEST PLAYBOOK:'
+    motd_greet: 'WELCOME TO PLAYBOOK:'
    tasks:
    - name: test motd
      copy:
