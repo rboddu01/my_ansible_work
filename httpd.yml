@@ -1,5 +1,5 @@
 ---
-- name: This is to setup an httpd webserver
+- name: This playbook is to setup an httpd webserver
   hosts: host1 host2
   tasks:
   - name: Install the httpd rpm
