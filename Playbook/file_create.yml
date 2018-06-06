@@ -1,0 +1,13 @@
+---
+ - hosts: host1 host2
+   user: root
+   vars:
+    newtest: 'Nothing is changing about your current settings or how your information is processed. Rather, we’ve improved the way we describe our practices and how we explain the optios'
+   tasks:
+   - name: file create
+     file: path=/root/newtest.txt state=touch owner=root group=root mode=0600
+   - name: copy note   
+     copy:
+      dest: /root/newtest.txt
+      content: "{{ newtest }}"
+         

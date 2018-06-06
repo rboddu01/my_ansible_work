@@ -1,0 +1,10 @@
+---
+ - hosts: host1 host2
+   user: root
+   vars:
+    motd_greet: 'WELCOME TO TEST PLAYBOOK:'
+   tasks:
+   - name: test motd
+     copy:
+      dest: /etc/motd
+      content: "{{ motd_greet }}"   

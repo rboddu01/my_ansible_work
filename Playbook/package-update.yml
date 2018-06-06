@@ -1,0 +1,13 @@
+---
+ - name: update all packages in all hosts
+   hosts: host1 host2
+   tasks: 
+   - name: Update packages with yum
+     yum: 
+       name: '*' 
+       update_cache: yes
+       state: latest
+       notfify:
+ 
+            - Restart Server
+            - Wait to Mechine Bootup 

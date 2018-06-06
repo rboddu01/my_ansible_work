@@ -1,0 +1,48 @@
+---
+
+ - name: To ensure the user tvmscanr user and grou[p are present with required attributes and properties
+
+   hosts: host1 host2
+
+   become: True
+
+   gather_facts: false
+
+
+   tasks:
+
+     - name: To verify whether the user tvmscanr user is present on remote server
+
+       shell: grep "^tvmscanr:" /etc/passwd | grep ":991233:991233" | wc -l | awk '{if ($1=="1") print "0";else print "1"}'
+
+       register: user_exist
+
+
+     - name: To verify whether the gtvmscanr group are present on the remote server
+
+       shell: grep "^gtvmscanr:x:991233:" /etc/group | wc -l | awk '{if ($1=="1") print "0";else print "1"}'
+
+       register: group_exist
+
+
+     - name: To verify whether the directory /home/tvmscanr is present on remote server
+
+       stat:
+
+         path: /home/tvmscanr
+
+       register: dir_exist
+
+
+     - name: This task includes the tasks which will be executed only on the servers which have tvmscanr user, gtvmscanr group and /home/tvmscanr directory
+
+       include_tasks: includedtasks.yml
+
+       when:
+
+         - user_exist.stdout == "0"
+
+         - group_exist.stdout == "0"
+
+         - dir_exist.stat.isdir
+

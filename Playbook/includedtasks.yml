@@ -1,0 +1,99 @@
+---
+
+  - name: To verify that the script is loading
+
+    debug: msg="This tasks file has been included"
+
+
+  - name: To verify the user tvmscanr and its properties are as expected
+
+    user:
+
+      name: tvmscanr
+
+      home: /home/tvmscanr
+
+      uid: 991233
+
+
+  - name: To verify the group gtvmscanr and its properties are as expected
+
+    group:
+
+      name: gtvmscanr
+
+      state: present
+
+      gid: 991233
+
+
+  - name: To verify wether the directory /home/tvmscanr/.ssh is present or not
+
+    file:
+
+      path: /home/tvmscanr/.ssh
+
+      owner: tvmscanr
+
+      group: gtvmscanr
+
+      mode: 0700
+
+      state: directory
+
+
+  - name: To copy the authorized_keys file to the /home/tvmscanr/.ssh and also its properties
+
+    copy:
+
+      src: /opt/authorized_keys
+
+      dest: /home/tvmscanr/.ssh/authorized_keys
+
+      owner: tvmscanr
+
+      group: gtvmscanr
+
+      mode: 0600
+
+
+  - name: To verify if sudo command is installed or not
+
+    stat:
+
+      path: /bin/sudo
+
+    register: sudo_details
+
+
+  - name: To verify the sudoers file is present in remote servers or not
+
+    file:
+
+      path: /etc/sudoers.d
+
+      owner: root
+
+      group: root
+
+      mode: 0750
+
+      state: directory
+
+
+  - name: To copy the file 99_tvmscanr to the /etc/sudoers.d and also its properties
+
+    copy:
+
+      src: /opt/99_tvmscanr
+
+      dest: /etc/sudoers.d/99_tvmscanr
+
+      owner: root
+
+      group: root
+
+      mode: 0600
+
+
+
