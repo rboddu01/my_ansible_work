@@ -6,5 +6,5 @@
    tasks:
    - name: test motd
      copy:
-      dest: /etc/motd
-      content: "{{ motd_greet }}"   
+     dest: /etc/motd
+     content: "{{ motd_greet }}"   
